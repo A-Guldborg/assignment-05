@@ -4,7 +4,7 @@ using GildedRose;
 public class ProgramTests
 {
     Program _app;
-    ProgramTests() {
+    public ProgramTests() {
         _app = new(){
             Items = new List<Item>(){}
         };
