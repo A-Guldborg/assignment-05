@@ -38,6 +38,6 @@ graph TD
     D --true--> E[Name != 'Sulfurus']
     E --true--> F[Quality - 1]
     C --false--> G[Quality = Quality - Quality *revise*]
-    A --false--> H[Quality < 50]
+    B --false--> H[Quality < 50]
     H --true--> I[Quality + 1]
 ```

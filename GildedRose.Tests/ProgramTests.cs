@@ -29,7 +29,22 @@ public class ProgramTests
     }
 
     [Fact]
-    public void Test_Brie_Q_is_40_gives_Q_equals_42()
+    public void Test_Brie_Q_is_40_gives_Q_equals_42_When_SellIn_Is_Negative()
+    {
+        // Given
+        var brie = new Item{ Name = "Aged Brie", SellIn = -4, Quality = 40 };
+        _app.Items.Add(brie);
+    
+        // When
+        _app.UpdateQuality();
+    
+        // Then
+        brie.SellIn.Should().Be(-5);
+        brie.Quality.Should().Be(42);
+    }
+    
+    [Fact]
+    public void Test_Brie_Q_is_40_gives_Q_equals_41_When_SellIn_Is_Positive()
     {
         // Given
         var brie = new Item{ Name = "Aged Brie", SellIn = 4, Quality = 40 };
@@ -40,7 +55,7 @@ public class ProgramTests
     
         // Then
         brie.SellIn.Should().Be(3);
-        brie.Quality.Should().Be(42);
+        brie.Quality.Should().Be(41);
     }
 
     [Fact]
@@ -89,7 +104,7 @@ public class ProgramTests
     }
 
     [Fact]
-    public void BackstagePass_SellIn_MoreThan6_LessThan11_Q_LessThan50_Should_Increment_Q_1()
+    public void BackstagePass_SellIn_MoreThan6_LessThan11_Q_LessThan50_Should_Increment_Q_2()
     {
         // Given
         var item = new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 7, Quality = 40};
@@ -99,11 +114,11 @@ public class ProgramTests
         _app.UpdateQuality();
     
         // Then
-        item.Quality.Should().Be(41);
+        item.Quality.Should().Be(42);
     }
 
     [Fact]
-    public void BackstagePass_SellIn_LessThan6_LessThan50_Should_Increment_Q_2()
+    public void BackstagePass_SellIn_LessThan6_LessThan50_Should_Increment_Q_3()
     {
         // Given
         var item = new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 3, Quality = 40};
@@ -113,7 +128,7 @@ public class ProgramTests
         _app.UpdateQuality();
     
         // Then
-        item.Quality.Should().Be(42);
+        item.Quality.Should().Be(43);
     }
 
     [Fact]
