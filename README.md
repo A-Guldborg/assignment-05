@@ -1,87 +1,43 @@
-# Assignment #5
+# Mermaid Flowchart Graph
 
-## C♯: Gilded Rose Refactoring Kata
+## Item Quality
 
-Hi and welcome to team Gilded Rose. As you know, we are a small inn with a
-prime location in a prominent city ran by a friendly innkeeper named
-Allison. We also buy and sell only the finest goods. Unfortunately, our
-goods are constantly degrading in quality as they approach their sell by
-date. We have a system in place that updates our inventory for us. It was
-developed by a no-nonsense type named Leeroy, who has moved on to new
-adventures. Your task is to add the new feature to our system so that we
-can begin selling a new category of items. First an introduction to our
-system:
-
-- All items have a SellIn value which denotes the number of days we have
-to sell the item
-- All items have a Quality value which denotes how valuable the item is
-- At the end of each day our system lowers both values for every item
-
-Pretty simple, right? Well this is where it gets interesting:
-
-- Once the sell by date has passed, Quality degrades twice as fast
-- The Quality of an item is never negative
-- "Aged Brie" actually increases in Quality the older it gets
-- The Quality of an item is never more than 50
-- "Sulfuras", being a legendary item, never has to be sold or decreases
-in Quality
-- "Backstage passes", like aged brie, increases in Quality as it's SellIn
-value approaches; Quality increases by 2 when there are 10 days or less
-and by 3 when there are 5 days or less but Quality drops to 0 after the
-concert
-
-We have recently signed a supplier of conjured items. This requires an
-update to our system:
-
-- "Conjured" items degrade in Quality twice as fast as normal items
-
-Feel free to make any changes to the UpdateQuality method and add any
-new code as long as everything still works correctly. However, do not
-alter the Item class or Items property as those belong to the goblin
-in the corner who will insta-rage and one-shot you as he doesn't
-believe in shared code ownership (you can make the UpdateQuality
-method and Items property static if you like, we'll cover for you).
-
-Just for clarification, an item can never have its Quality increase
-above 50, however "Sulfuras" is a legendary item and as such its
-Quality is 80 and it never alters.
-
-### Exercise
-
-Fork the repository and implement the "Conjured" use case.
-
-You should start by writing a set of tests which prove that the original program works to specification.
-
-Then refactor the code to support "Conjured".
-
-You might want to consider extracting to smaller methods and afterwards implementing small classes using polymorphism.
-
-*The rule about not altering things due to the goblin in the corner may be tweaked if you can defend it...*
-
-### Code Coverage
-
-To calculate code coverage on this project using Coverlet you can run:
-
-```bash
-dotnet test /p:CollectCoverage=true
+```mermaid
+graph TD
+    A[Name != 'Brie'] --true--> B[Name != 'Backstage pass']
+    A --false--> C[Quality < 50]
+    B --false--> C
+    B --true--> D[Quality > 0]
+    D --true--> E[Name != 'Sulfuras']
+    E --true--> F[Quality - 1]
+    C --true--> G[Quality + 1]
+    G --> H[Name == 'Backstage pass']
+    H --true--> I[SellIn < 11]
+    I --true--> J[Quality < 50 *duplicate*]
+    J --true--> K[Quality + 1]
+    I --false--> L[SellIn < 6]
+    K --> L
+    L --true--> M[Quality < 50 *duplicate*]
+    M --true--> N[Quality + 1]
 ```
 
-*Aim for 95-100% code coverage before you start refactoring!*
+## Item SellIn
 
-### Notes
+```mermaid
+graph TD
+    A[Name != 'Sulfuras'] --true--> B[SellIn - 1] 
+```
 
-Who: [@TerryHughes](https://twitter.com/TerryHughes), [@NotMyself](https://twitter.com/NotMyself)
+## SellIn < 0
 
-What & Why: [Refactor This: The Gilded Rose Kata](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/)
-
-This work is by [@TerryHughes](https://twitter.com/TerryHughes), [@NotMyself](https://twitter.com/NotMyself)
-
-The repository can be found at [https://github.com/NotMyself/GildedRose](https://github.com/NotMyself/GildedRose)
-
-## Bonus Exercise
-
-Rewrite your repository implementations from Assignment #4 to use `async` and `await`.
-
-## SE
-
-none this week
+```mermaid
+graph TD
+    A[SellIn < 0] --true--> B[Name != 'Brie']
+    B --true--> C[Name != 'Backstage pass']
+    C --true--> D[Quality > 0]
+    D --true--> E[Name != 'Sulfurus']
+    E --true--> F[Quality - 1]
+    C --false--> G[Quality = Quality - Quality *revise*]
+    A --false--> H[Quality < 50]
+    H --true--> I[Quality + 1]
+```
