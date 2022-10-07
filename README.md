@@ -15,7 +15,7 @@ graph TD
     H --true--> I[SellIn < 11]
     I --true--> J[Quality < 50 *duplicate*]
     J --true--> K[Quality + 1]
-    I --false--> L[SellIn < 6]
+    I --false *unused*--> L[SellIn < 6]
     K --> L
     L --true--> M[Quality < 50 *duplicate*]
     M --true--> N[Quality + 1]
