@@ -133,6 +133,60 @@ namespace GildedRose
             }
         }
 
+        public void UpdateQualitySwitch()
+        {
+            for (var i = 0; i < Items.Count; i++)
+            {
+                switch(Items[i].Name){
+                    case "Aged Brie":
+                        if(Items[i].Quality < 50){
+                            Items[i].Quality++;
+                        }
+                        if(Items[i].SellIn < 0){
+                            Items[i].Quality++;
+                        }
+                        break;
+                    case "Backstage passes to a TAFKAL80ETC concert":
+                        if(Items[i].Quality < 50){
+                            Items[i].Quality++;
+                        }
+                        if(Items[i].SellIn < 11 && Items[i].Quality < 50){
+                            Items[i].Quality++;
+                        }
+                        if(Items[i].SellIn < 6 && Items[i].Quality < 50){
+                            Items[i].Quality++;
+                        }
+                        
+                        break;
+                    case "Sulfuras, Hand of Ragnaros":
+                        break;
+                    case "Conjured":
+                        if(Items[i].Quality > 0){
+                            Items[i].Quality--;
+                            if(Items[i].Quality > 0){
+                                Items[i].Quality--;
+                            }
+                        }
+                        Items[i].SellIn--;
+                        if(Items[i].SellIn < 0 && Items[i].Quality > 0){
+                            Items[i].Quality--;
+                            if(Items[i].Quality > 0){
+                                Items[i].Quality--;
+                            }
+                        }
+                        break;
+                    default:
+                        if(Items[i].Quality > 0){
+                            Items[i].Quality--;
+                        }
+                        Items[i].SellIn--;
+                        if(Items[i].SellIn < 0 && Items[i].Quality > 0){
+                            Items[i].Quality--;
+                        }
+                        break;
+                }
+            }
+        }
     }
 
     public class Item
