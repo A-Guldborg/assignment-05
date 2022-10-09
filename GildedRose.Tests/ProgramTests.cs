@@ -138,7 +138,7 @@ public class ProgramTests
         _app.UpdateQuality();
     
         // Then
-        item.Quality.Should().Be(42);
+        item.Quality.Should().Be(41);
     }
 
     [Fact]
