@@ -1,6 +1,27 @@
 # Mermaid Flowchart Graph
 
-Below is group 18's GildedRose assignment-05.
+This is group 18's GildedRose assignment-05.
+Group members:
+
+- aguh
+- laku
+- mlth
+
+We have not tested the main method as this is not part of the business rules of the program, thus running `dotnet test /p:CollectCoverage=true` should either be done after commenting out the `Main(string[] args)` method or alternatively be considered when interpreting the results.
+
+When commenting out the Main method, the test coverage is the following:
+
+```sh
++---------+--------+--------+--------+
+|         | Line   | Branch | Method |
++---------+--------+--------+--------+
+| Total   | 95.12% | 100%   | 90.9%  |
++---------+--------+--------+--------+
+| Average | 95.12% | 100%   | 90.9%  |
++---------+--------+--------+--------+
+```
+
+## Refactoring
 
 We have decidede to refactor the Item class (and angry the Goblin in the corner), because this was the only way we could avoid code duplication while following good software engineering principles.
 
